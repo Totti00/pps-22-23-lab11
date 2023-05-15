@@ -37,9 +37,22 @@ search(X, [_ | T]) :- search(X, T).
 
 sublist([], _).
 sublist([H | T], L) :- search(H, L), sublist(T, L).
+% sublist([1,2], [5,3,2,1])
 
+%2.1
+% dropAny(?Elem, ?List, ?OutList)
+dropAny(X, [X | T], T).
+dropAny(X, [H | T], [H | T1]) :- dropAny(X, T, T1).
 
+%2.2
+% dropFirst(?Elem, ?List, ?OutList)
+%dropFirst(X, [X | T], T) :- !.
+%dropFirst(X, [H | T], [H | T1]) :- dropFirst(X, T, T1).
+dropFirst(X, L, T) :- dropAny(X, L, T), !.
 
+%dropLast(?Elem, ?List, ?OutList)
+dropLast(X, [X | T], T).
+dropLast(X, [H | T], [H | T1]) :- dropLast(X, T, T1).
 
 
 
